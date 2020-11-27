@@ -12,4 +12,4 @@ class DatabaseConnection:
 
 
 if __name__ == '__main__':
-    DatabaseConnection.get_all()
+    print(DatabaseConnection.get_all())

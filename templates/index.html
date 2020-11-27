@@ -22,25 +22,19 @@
     <table class="table">
         <thead>
         <tr>
+            <th scope="col">Nummer</th>
             <th scope="col">Name</th>
             <th scope="col">Preis</th>
-            <th scope="col">Kreditkarte</th>
-            <th scope="col">Kredit</th>
         </tr>
         </thead>
         <tbody>
+        {% for bank in banks %}
         <tr>
-            <td>Holvi</td>
-            <td>10€ im Monat</td>
-            <td>Ja</td>
-            <td>10 000€</td>
+            <td>{{ bank[0] }}</td>
+            <td>{{ bank[1] }}</td>
+            <td>{{ bank[2] }}</td>
         </tr>
-        <tr>
-            <td>Holvi</td>
-            <td>10€ im Monat</td>
-            <td>Ja</td>
-            <td>10 000€</td>
-        </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>
