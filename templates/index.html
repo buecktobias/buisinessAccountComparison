@@ -17,27 +17,51 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<nav class="navbar navbar-light" style="background-color: #aaaaaa;">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">Geschäftskonto Vergleich</span>
+    </div>
+</nav>
 <div class="container">
     <h1>Geschäftskonto Vergleich</h1>
-
-    <table class="table">
+    <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">Nummer</th>
-            <th scope="col">Name</th>
-            <th scope="col">Preis</th>
+            {% for name in column_names %}
+                <th scope="col">{{ name }}</th>
+            {% endfor %}
         </tr>
         </thead>
         <tbody>
         {% for bank in banks %}
-        <tr>
-            <td>{{ bank[0] }}</td>
-            <td>{{ bank[1] }}</td>
-            <td>{{ bank[2] }}</td>
-        </tr>
+
+            <tr class="clickable-row" data-href="{{ bank.href }}">
+                <td><img width=100 class="img-fluid" src="{{ bank.logo }}" alt="Logo {{ bank.bank_name }}"></td>
+                <td>{{ bank.package_name }}</td>
+                <td>{{ bank.description }}</td>
+                <td>{{ bank.price_per_year }}</td>
+            </tr>
+
         {% endfor %}
         </tbody>
     </table>
 </div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+
 </body>
 </html>

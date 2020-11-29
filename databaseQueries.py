@@ -1,15 +1,26 @@
 import sqlite3
 
+from bankObject import BankObject
+
 
 class DatabaseConnection:
-    @staticmethod
-    def get_all():
+    @classmethod
+    def __get_all(cls):
         conn = sqlite3.connect("/home/tobias/PycharmProjects/flaskProject/geschaeftskonto")
-        cur = conn.execute("SELECT * FROM geschaeftskonto")
+        cur = conn.execute("SELECT Paket_Name,Bank_Name,Beschreibung, Kosten_Im_Jahr, Logo, Link FROM geschaeftskonto;")
         result = cur.fetchall()
         conn.commit()
         return result
 
+    @classmethod
+    def get_all_bank_objects(cls):
+        all_rows = cls.__get_all()
+        all_bank_objects = []
+        for row in all_rows:
+            new_bank_object = BankObject(bank_name=row[1], package_name=row[0], price_per_year=row[3], description=row[2], logo=row[4], href=row[5])
+            all_bank_objects.append(new_bank_object)
+        return all_bank_objects
+
 
 if __name__ == '__main__':
-    print(DatabaseConnection.get_all())
+    print(DatabaseConnection.get_all_bank_objects())
