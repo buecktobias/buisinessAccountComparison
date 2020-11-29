@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     all_banks = DatabaseConnection.get_all_bank_objects()
-    column_names = ["Bank", "Packet", "Beschreibung", "Preis im Jahr"]
+    column_names = ["Bank", "Beschreibung", "Preis im Jahr"]
     return render_template("index.html", banks=all_banks, column_names=column_names)
 
 
