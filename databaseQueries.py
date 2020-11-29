@@ -1,12 +1,15 @@
 import sqlite3
-
+import os
 from bankObject import BankObject
 
 
 class DatabaseConnection:
     @classmethod
     def __get_all(cls):
-        conn = sqlite3.connect("/home/tobias/PycharmProjects/flaskProject/geschaeftskonto")
+        # TODO connect address ????
+        current_dir = os.getcwd()
+        database_path = os.path.join(current_dir, "geschaeftskonto")
+        conn = sqlite3.connect(database_path)
         cur = conn.execute("SELECT Paket_Name,Bank_Name,Beschreibung, Kosten_Im_Jahr, Logo, Link FROM geschaeftskonto;")
         result = cur.fetchall()
         conn.commit()
