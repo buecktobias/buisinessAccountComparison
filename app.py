@@ -1,6 +1,5 @@
 from flask import Flask, render_template
 
-from bankObject import BankObject
 from databaseQueries import DatabaseConnection
 
 app = Flask(__name__)
