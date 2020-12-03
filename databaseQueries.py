@@ -6,7 +6,6 @@ from bankObject import BankObject
 class DatabaseConnection:
     @classmethod
     def __get_all(cls):
-        # TODO connect address ????
         current_dir = os.getcwd()
         database_path = os.path.join(current_dir, "geschaeftskonto")
         conn = sqlite3.connect(database_path)

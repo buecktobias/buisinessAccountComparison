@@ -1,5 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
+from bankObjectSorter import BankObjectSorter
+from column import Column
 from databaseQueries import DatabaseConnection
 
 app = Flask(__name__)
@@ -7,8 +9,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    column = request.args.get('sort_by', None)
     all_banks = DatabaseConnection.get_all_bank_objects()
-    column_names = ["Bank", "Beschreibung", "Preis im Jahr"]
+    column_names = [Column("Bank", False, ""), Column("Beschreibung", False, ""), Column("Preis im Jahr", True, "price_per_year")]
+    print(column)
+    if column is not None and column == "price_per_year":
+        all_banks = BankObjectSorter().sort_by_price(all_banks)
+
     return render_template("index.html", banks=all_banks, column_names=column_names)
 
 
